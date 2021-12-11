@@ -1047,3 +1047,7 @@ class AuthenticatedClient(PublicClient):
                 }
         """
         return self._send_message('get', '/fees')
+    
+    
+    def get_transfer(self, deposit_id):
+        return self._send_message('get', '/transfers/' + deposit_id)
