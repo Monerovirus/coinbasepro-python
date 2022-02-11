@@ -909,7 +909,7 @@ class AuthenticatedClient(PublicClient):
         return self._send_message('post', '/withdrawals/coinbase-account',
                                   data=json.dumps(params))
 
-    def crypto_withdraw(self, amount, currency, crypto_address):
+    def crypto_withdraw(self, amount, currency, crypto_address, crypto_memo=''):
         """ Withdraw funds to a crypto address.
 
         Args:
@@ -929,6 +929,9 @@ class AuthenticatedClient(PublicClient):
         params = {'amount': amount,
                   'currency': currency,
                   'crypto_address': crypto_address}
+        if len(crypto_memo) > 0:
+            params['destination_tag'] = crypto_memo
+            params['no_destination_tag'] = False
         return self._send_message('post', '/withdrawals/crypto',
                                   data=json.dumps(params))
 
